@@ -1,73 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selamat Ulang Tahun, Sayang!</title>
+    <title>Tap Counter</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Mengimpor Font Amiri */
+        @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
+
         body {
-            background-image: url('https://source.unsplash.com/1600x900/?romantic,sunset');
-            background-size: cover;
-            background-position: center;
+            background-color: #f9f9f9;
+            font-family: 'Amiri', serif;
         }
 
-        .heart {
-            color: #e53e3e;
-            animation: pulse 1.5s infinite;
+        /* Animasi */
+        .scale-up {
+            transition: transform 0.2s ease-in-out;
         }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
+        .scale-up:hover {
+            transform: scale(1.1);
         }
 
-        .fade-in {
-            opacity: 0;
-            animation: fadeIn 2s forwards;
+        /* Ubah Font Menjadi Angka Arab */
+        @font-face {
+            font-family: 'ArabicNumerals';
+            src: url('https://fonts.gstatic.com/ea/notosansarabic/v2/NotoSansArabic-ExtraBold.woff2') format('woff2');
         }
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
+        .arabic-numerals {
+            font-family: 'ArabicNumerals', serif;
+        }
+
+        /* Tombol Warna Modern dan Elegan */
+        .btn-tap {
+            background-color: #4A5568; /* Abu-abu gelap elegan */
+            color: #fff;
+        }
+
+        .btn-tap:hover {
+            background-color: #2D3748; /* Lebih gelap saat hover */
+        }
+
+        .btn-reset {
+            background-color: #2F855A; /* Hijau elegan */
+            color: #fff;
+        }
+
+        .btn-reset:hover {
+            background-color: #276749; /* Lebih gelap saat hover */
+        }
+
+        /* Desain untuk teks sholawat */
+        .sholawat-text {
+            font-size: 1.25rem;
+            color: #2D3748;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
-<body class="h-screen flex items-center justify-center bg-opacity-80 font-sans text-white">
-    <div class="bg-black bg-opacity-70 p-8 rounded-lg shadow-lg text-center max-w-md mx-auto">
-        <!-- Bagian Utama Ucapan -->
-        <h1 class="text-4xl font-bold text-pink-500 mb-4 fade-in">Selamat Ulang Tahun, Sayang! 🎉</h1>
-        <p class="text-lg fade-in">Hari ini adalah hari spesial untukmu, dan aku sangat bersyukur bisa merayakannya bersamamu. 💖</p>
+<body class="flex flex-col items-center justify-center h-screen">
 
-        <!-- Tombol untuk menampilkan pesan khusus -->
-        <button id="revealButton" class="bg-pink-600 text-white px-6 py-3 rounded-full mt-6 font-semibold hover:bg-pink-700 transition duration-300">
-            Buka Pesan Khusus
-        </button>
-
-        <!-- Pesan yang akan muncul setelah tombol diklik -->
-        <div id="specialMessage" class="text-lg mt-6 hidden fade-in">
-            <p>Dear <span class="font-bold">[Nama Pacar]</span>,</p>
-            <p class="mt-2">Semoga semua impianmu tercapai, dan kita selalu bisa merayakan momen bahagia ini bersama-sama. Kamu adalah hal terindah yang pernah terjadi dalam hidupku. 🎂</p>
-            <p class="mt-4 heart text-3xl">❤️❤️❤️</p>
-        </div>
+    <!-- Teks Sholawat di atas counter -->
+    <div class="text-center px-8">
+        <p class="sholawat-text">
+            اَللّٰهُمَّ صَلِّ وَسَلِّمْ عَلَى سَيِّدِنَا مُحَمَّدٍ
+        </p>
     </div>
 
-    <script>
-        const revealButton = document.getElementById('revealButton');
-        const specialMessage = document.getElementById('specialMessage');
+    <!-- Container Utama -->
+    <div class="text-center bg-white p-10 rounded-xl shadow-lg w-96">
+        <h1 class="text-4xl font-bold text-gray-700 mb-6">عداد النقر</h1>
+        <p id="counter" class="text-6xl font-semibold text-gray-900 mb-8 arabic-numerals">٠</p>
+        
+        <!-- Tombol Tap -->
+        <button onclick="increaseCounter()" 
+                class="btn-tap px-8 py-4 rounded-full font-semibold text-xl hover:bg-brown-700 transition duration-300 scale-up">
+            اضغط هنا!
+        </button>
 
-        revealButton.addEventListener('click', function() {
-            specialMessage.classList.remove('hidden');
-            revealButton.classList.add('hidden');
-        });
+        <!-- Tombol Reset -->
+        <button onclick="resetCounter()"
+                class="btn-reset px-6 py-2 mt-6 rounded-full font-semibold text-lg hover:bg-green-700 transition duration-300 scale-up">
+            إعادة تعيين
+        </button>
+    </div>
+
+    <!-- Teks Sholawat di bawah counter -->
+    <div class="text-center mt-8 px-8">
+        <p class="sholawat-text">
+            اَللّٰهُمَّ صَلِّ عَلَى سَيِّدِنَا مُحَمَّدٍ ࣙالْفَاتِحِ لِمَا أُغْلِقَ، وَالْخَاتِمِ لِمَا سَبَقَ، نَاصِرِ الْحَقِّ بِالْحَقِّ، وَالْهَادِيْ إِلَى صِرَاطِكَ الْمُسْتَقِيْمِ، وَعَلَى اٰلِهِ وَصَحْبِهِ حَقَّ قَدْرِهِ وَمِقْدَارِهِ الْعَظِيْمِ
+        </p>
+    </div>
+
+    <!-- Script JavaScript untuk Counter -->
+    <script>
+        let counterValue = 0;
+
+        // Fungsi untuk menambah counter
+        function increaseCounter() {
+            counterValue++;
+            document.getElementById('counter').innerHTML = convertToArabicNumerals(counterValue);
+        }
+
+        // Fungsi untuk mereset counter ke 0
+        function resetCounter() {
+            counterValue = 0;
+            document.getElementById('counter').innerHTML = '٠';
+        }
+
+        // Fungsi untuk mengonversi angka ke angka Arab
+        function convertToArabicNumerals(number) {
+            const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+            return number.toString().split('').map(num => arabicNumerals[num]).join('');
+        }
     </script>
 </body>
 </html>
