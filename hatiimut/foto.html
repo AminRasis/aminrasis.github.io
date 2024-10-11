@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foto Kita Berdua</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #f3e8ff;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+
+        /* Animasi untuk gambar */
+        .zoom-in {
+            transition: transform 0.5s ease;
+        }
+
+        .zoom-in:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center h-screen">
+
+    <h1 class="text-4xl font-bold mb-8">Inilah Momen Kita Berdua</h1>
+
+    <!-- Foto berdua -->
+    <img src="foto_kita.jpg" alt="Foto Kita Berdua" class="rounded-lg shadow-lg zoom-in" width="500">
+
+    <!-- Tombol kembali ke halaman utama -->
+    <div class="mt-8">
+        <a href="index.html">
+            <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full transition duration-500 ease-in-out transform hover:scale-110">
+                Kembali ke Halaman Motivasi
+            </button>
+        </a>
+    </div>
+
+</body>
+</html>
